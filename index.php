@@ -2,16 +2,14 @@
 
 session_start();
 
-if($_SESSION['user_email']==true){
+if($_SESSION['admin_email']==true){
 	}
 	else{
 		header('location: login.php');
 	}
 
 include ("includes/db.php");
-include ("functions/functions.php");
 ?>
-
 <html>
 <head>
 	<title>MyGym | Index</title>
@@ -19,57 +17,60 @@ include ("functions/functions.php");
 </head>
 <body>
 	<!-- Main Container Start -->
-	<div class="main_wrapper">
+	<div class="wrapper">
 		
 		<!-- Header Start -->
-		<div class="header_wrapper">
-			<a href="index.php"><img src="images/logo.jpg"></a>
+		<div class="header">
+			<a href="index.php"><img src="images/header.jpg"></a>
+			<!-- <img src="images/add2card.jpg" style="float: right"> -->
 		</div>
 		<!-- Header End -->
 		
-		<!-- NavBar Start -->
-		<div id="navbar">
-			<ul id="menu">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="my_account.php">My Account</a></li>
-				<li><a href="index.php">Contact Us</a></li>
-			</ul>
-
-			<div id="login-btn-signup">
-					<li><a href="logout.php">Logout</a></li>
-			</div>
-		</div>
-		<!-- NavBar End -->
-		
 		<!-- Content Start -->
 		<div class="content_wrapper">
-			<div id="left_sidebar">
-				<div id="sidebar_title">Days</div>
-				<ul id="days">
-					<?php  
-						getDays();
-					?>
-				</ul>
-
-				<div id="sidebar_title">Exercises</div>
-				<ul id="days">
-					<?php 
-						getExercise();
-					?>
-				</ul>
+			<div class="right" style="background-image: url(images/right.jpg)">
+					<a href="index.php?view_users">View Users</a>
+					<a href="index.php?view_trainers">View Trainers</a>
+					<a href="index.php?add_trainers">Add Trainers</a>
+					<a href="index.php?view_exercises">View Exercises</a>
+					<a href="index.php?add_exercises">Add Exercises</a>
+					<a href="logout.php">Admin Logout</a>
 			</div>
-			<div id="right_content">
-				<div id="headline">
-					<div id="headline_content">
-						<h1 style="color: yellow; text-align:center;"><center>No pain no gain</center></h1>
-					</div>
-				</div>
-					<!-- Product Display Box Start -->
-					<div id="products_box" style="background-image: url(images/bg2.jpg)">
+			<div class="left" style="background-image: url(images/bg1.jpg)">
+				<!-- Product Display Box Start -->
+					<div id="products_box">
 						<?php
-							get_All_Exercises();
-							get_Day_Exercises();
-							get_Exer_Exercises();
+							if (isset($_GET['view_users'])) {
+								include("view_users.php");
+							}
+							if (isset($_GET['view_trainers'])) {
+								include("view_trainers.php");
+							} 
+							if (isset($_GET['add_trainers'])) {
+								include("add_trainers.php");
+							}
+							if (isset($_GET['view_exercises'])) {
+								include("view_exercises.php");
+							}
+							if (isset($_GET['add_exercises'])) {
+								include("add_exercises.php");
+							}
+							if (isset($_GET['edit_tran'])) {
+								include("edit_tran.php");
+							}
+							if (isset($_GET['edit_exercise'])) {
+								include("edit_exercises.php");
+							}
+							if (isset($_GET['delete_exercise'])) {
+								include("delete_exercise.php");
+							}
+							if (isset($_GET['delete_tran'])) {
+								include("delete_trainer.php");
+							}
+							if (isset($_GET['delete_user'])) {
+								include("delete_user.php");
+							}
+
 						?>
 					</div>
 					<!-- Product Display Box End -->
